@@ -22,8 +22,7 @@
 #define XMIME_H
 
 #include <QObject>
-#include "xformats.h"
-#include "xarchives.h"
+#include "staticscan.h"
 
 class XMIME : public QObject
 {
@@ -32,11 +31,13 @@ public:
     enum TYPE
     {
         TYPE_UNKNOWN=0,
+        TYPE_VND_MICROSOFT_PORTABLE_EXECUTABLE,
     };
 
     explicit XMIME(QObject *pParent=nullptr);
-    static QSet<TYPE> getTypes(QIODevice *pDevice);
-    static QSet<TYPE> getTypes(QString sFileName);
+    static QList<TYPE> getTypes(QIODevice *pDevice);
+    static QList<TYPE> getTypes(QString sFileName);
+    QString typeIdToString(TYPE id);
 
 signals:
 

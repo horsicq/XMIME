@@ -12,7 +12,7 @@ SOURCES += \
     include(../Formats/xformats.pri)
 }
 
-!contains(XCONFIG, xarchives) {
-    XCONFIG += xarchives
-    include(../XArchive/xarchives.pri)
+!contains(XCONFIG, staticscan) {
+    XCONFIG += staticscan
+    include(../Staticscan/staticscan.pri)
 }

@@ -25,17 +25,25 @@ XMIME::XMIME(QObject *pParent) : QObject(pParent)
 
 }
 
-QSet<XMIME::TYPE> XMIME::getTypes(QIODevice *pDevice)
+QList<XMIME::TYPE> XMIME::getTypes(QIODevice *pDevice)
 {
-    QSet<XMIME::TYPE> stResult;
+    QList<XMIME::TYPE> listResult;
 
+    SpecAbstract::SCAN_OPTIONS options={};
+    SpecAbstract::SCAN_RESULT scanResult=StaticScan::processDevice(pDevice,&options);
 
-    return stResult;
+    if( SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_PE32)||
+        SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_PE64))
+    {
+        listResult.append(TYPE_VND_MICROSOFT_PORTABLE_EXECUTABLE);
+    }
+
+    return listResult;
 }
 
-QSet<XMIME::TYPE> XMIME::getTypes(QString sFileName)
+QList<XMIME::TYPE> XMIME::getTypes(QString sFileName)
 {
-    QSet<XMIME::TYPE> stResult;
+    QList<XMIME::TYPE> listResult;
 
     QFile file;
 
@@ -43,10 +51,22 @@ QSet<XMIME::TYPE> XMIME::getTypes(QString sFileName)
 
     if(file.open(QIODevice::ReadOnly))
     {
-        stResult=getTypes(&file);
+        listResult=getTypes(&file);
 
         file.close();
     }
 
-    return stResult;
+    return listResult;
+}
+
+QString XMIME::typeIdToString(XMIME::TYPE id)
+{
+    QString sResult=tr("Unknown");
+
+    switch(id)
+    {
+        case TYPE_VND_MICROSOFT_PORTABLE_EXECUTABLE:            sResult=tr("application/vnd.microsoft.portable-executable");            break;
+    }
+
+    return sResult;
 }
