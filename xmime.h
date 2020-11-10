@@ -27,17 +27,11 @@
 class XMIME : public QObject
 {
     Q_OBJECT
-public:
-    enum TYPE
-    {
-        TYPE_UNKNOWN=0,
-        TYPE_VND_MICROSOFT_PORTABLE_EXECUTABLE,
-    };
 
+public:
     explicit XMIME(QObject *pParent=nullptr);
-    static QList<TYPE> getTypes(QIODevice *pDevice);
-    static QList<TYPE> getTypes(QString sFileName);
-    QString typeIdToString(TYPE id);
+    static QList<QString> getTypes(QIODevice *pDevice);
+    static QList<QString> getTypes(QString sFileName);
 
 signals:
 
