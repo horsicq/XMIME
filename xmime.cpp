@@ -36,6 +36,26 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice)
         SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_PE64))
     {
         listResult.append("application/vnd.microsoft.portable-executable");
+        listResult.append("application/x-dosexec");
+    }
+
+    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_SOURCECODE,SpecAbstract::RECORD_NAME_PYTHON))
+    {
+        listResult.append("text/x-python");
+    }
+
+    if( SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_SOURCECODE,SpecAbstract::RECORD_NAME_C)||
+        SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_SOURCECODE,SpecAbstract::RECORD_NAME_CCPP))
+    {
+        listResult.append("text/x-c");
+    }
+
+    if( SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_TEXT)||
+        SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_PLAINTEXT)||
+        SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UTF8) ||
+        SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNICODE))
+    {
+        listResult.append("text/plain");
     }
 
     return listResult;
