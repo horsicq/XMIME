@@ -39,28 +39,43 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
         listResult.append("application/x-dosexec");
     }
 
-    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_SOURCECODE,SpecAbstract::RECORD_NAME_PYTHON))
+    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_PYTHON))
     {
         listResult.append("text/x-python");
     }
 
-    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_SOURCECODE,SpecAbstract::RECORD_NAME_HTML))
+    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_PERL))
+    {
+        listResult.append("text/x-perl");
+    }
+
+    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_RUBY))
+    {
+        listResult.append("text/x-ruby");
+    }
+
+    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_HTML))
     {
         listResult.append("text/html");
     }
 
-    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_SOURCECODE,SpecAbstract::RECORD_NAME_XML))
+    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_XML))
     {
         listResult.append("text/xml");
     }
 
-    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_SOURCECODE,SpecAbstract::RECORD_NAME_SHELL))
+    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_PDF))
+    {
+        listResult.append("application/pdf");
+    }
+
+    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_SHELL))
     {
         listResult.append("text/x-shellscript");
     }
 
-    if( SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_SOURCECODE,SpecAbstract::RECORD_NAME_C)||
-        SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_SOURCECODE,SpecAbstract::RECORD_NAME_CCPP))
+    if( SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_C)||
+        SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_CCPP))
     {
         listResult.append("text/x-c");
     }
@@ -96,9 +111,7 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
     // application/x-zstd
     // application/zlib
     // application/javascript
-    // text/x-perl
     // application/x-archive
-    // application/pdf
 
     return listResult;
 }
