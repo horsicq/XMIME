@@ -30,8 +30,8 @@ class XMIME : public QObject
 
 public:
     explicit XMIME(QObject *pParent=nullptr);
-    static QList<QString> getTypes(QIODevice *pDevice);
-    static QList<QString> getTypes(QString sFileName);
+    static QList<QString> getTypes(QIODevice *pDevice,bool bIsAll=false);
+    static QList<QString> getTypes(QString sFileName,bool bIsAll=false);
 
 signals:
 

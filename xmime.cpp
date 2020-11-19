@@ -25,7 +25,7 @@ XMIME::XMIME(QObject *pParent) : QObject(pParent)
 
 }
 
-QList<QString> XMIME::getTypes(QIODevice *pDevice)
+QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
 {
     QList<QString> listResult;
 
@@ -44,6 +44,21 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice)
         listResult.append("text/x-python");
     }
 
+    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_SOURCECODE,SpecAbstract::RECORD_NAME_HTML))
+    {
+        listResult.append("text/html");
+    }
+
+    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_SOURCECODE,SpecAbstract::RECORD_NAME_XML))
+    {
+        listResult.append("text/xml");
+    }
+
+    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_SOURCECODE,SpecAbstract::RECORD_NAME_SHELL))
+    {
+        listResult.append("text/x-shellscript");
+    }
+
     if( SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_SOURCECODE,SpecAbstract::RECORD_NAME_C)||
         SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_SOURCECODE,SpecAbstract::RECORD_NAME_CCPP))
     {
@@ -55,13 +70,40 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice)
         SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UTF8) ||
         SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNICODE))
     {
-        listResult.append("text/plain");
+        if((listResult.count()==0)||(bIsAll))
+        {
+            listResult.append("text/plain");
+        }
     }
+    else
+    {
+        if((listResult.count()==0)||(bIsAll))
+        {
+            listResult.append("application/octet-stream");
+        }
+    }
+    
+    // TODO
+    // application/x-gzip
+    // application/x-bzip2
+    // application/x-bzip
+    // application/x-lzip
+    // application/x-7z-compressed
+    // application/x-lzma
+    // application/x-xz
+    // application/x-lrzip
+    // application/x-lz4
+    // application/x-zstd
+    // application/zlib
+    // application/javascript
+    // text/x-perl
+    // application/x-archive
+    // application/pdf
 
     return listResult;
 }
 
-QList<QString> XMIME::getTypes(QString sFileName)
+QList<QString> XMIME::getTypes(QString sFileName, bool bIsAll)
 {
     QList<QString> listResult;
 
@@ -71,7 +113,7 @@ QList<QString> XMIME::getTypes(QString sFileName)
 
     if(file.open(QIODevice::ReadOnly))
     {
-        listResult=getTypes(&file);
+        listResult=getTypes(&file,bIsAll);
 
         file.close();
     }
