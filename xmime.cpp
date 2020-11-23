@@ -38,15 +38,13 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
         listResult.append("application/vnd.microsoft.portable-executable");
         listResult.append("application/x-dosexec");
     }
-
-    if( SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_ELF32)||
-        SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_ELF64))
+    else if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_ELF32)||
+            SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_ELF64))
     {
         // TODO
     }
-
-    if( SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_MACHO32)||
-        SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_MACHO64))
+    else if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_MACHO32)||
+            SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_MACHO64))
     {
         // TODO
     }
