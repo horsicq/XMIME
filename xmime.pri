@@ -9,5 +9,5 @@ SOURCES += \
 
 !contains(XCONFIG, staticscan) {
     XCONFIG += staticscan
-    include(../Staticscan/staticscan.pri)
+    include(../StaticScan/staticscan.pri)
 }
