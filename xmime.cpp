@@ -84,6 +84,11 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
         listResult.append("audio/mpeg");
     }
 
+    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_PNG))
+    {
+        listResult.append("image/png");
+    }
+
     if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_SHELL))
     {
         listResult.append("text/x-shellscript");
