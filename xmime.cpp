@@ -89,6 +89,17 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
         listResult.append("image/png");
     }
 
+    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_JPEG))
+    {
+        listResult.append("image/jpg");
+        listResult.append("image/jpeg");
+    }
+
+    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_GIF))
+    {
+        listResult.append("image/gif");
+    }
+
     if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_SHELL))
     {
         listResult.append("text/x-shellscript");
