@@ -79,6 +79,11 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
         listResult.append("application/pdf");
     }
 
+    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_MP3))
+    {
+        listResult.append("audio/mpeg");
+    }
+
     if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_SHELL))
     {
         listResult.append("text/x-shellscript");
