@@ -36,17 +36,23 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
         SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_PE64))
     {
         listResult.append("application/vnd.microsoft.portable-executable");
-        listResult.append("application/x-dosexec");
     }
     else if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_ELF32)||
             SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_ELF64))
     {
+        listResult.append("application/x-executable");
         // TODO
     }
     else if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_MACHO32)||
             SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_MACHO64))
     {
+        listResult.append("application/x-mach-binary");
         // TODO
+    }
+
+    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_MSDOS))
+    {
+        listResult.append("application/x-dosexec");
     }
 
     if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_PYTHON))
