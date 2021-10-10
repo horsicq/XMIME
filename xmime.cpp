@@ -150,7 +150,6 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
     // application/javascript
     // application/x-archive
     // TODO wmv/wma
-    // TODO text files
 
     return listResult;
 }
