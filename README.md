@@ -1,1 +1,3 @@
 # XMIME
+
+Detect MIME
