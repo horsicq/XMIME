@@ -11,3 +11,6 @@ SOURCES += \
     XCONFIG += staticscan
     include($$PWD/../StaticScan/staticscan.pri)
 }
+
+DISTFILES += \
+    $$PWD/xmime.cmake
