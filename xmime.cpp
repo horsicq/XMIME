@@ -136,6 +136,7 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
     }
     
     // TODO
+    // application/vnd.android.package-archive
     // application/x-gzip
     // application/x-bzip2
     // application/x-bzip
