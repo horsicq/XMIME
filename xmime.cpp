@@ -25,7 +25,7 @@ XMIME::XMIME(QObject *pParent) : QObject(pParent)
 
 }
 
-QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
+QList<QString> XMIME::getTypes(QIODevice *pDevice,bool bIsAll)
 {
     QList<QString> listResult;
 
