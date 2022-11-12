@@ -23,14 +23,13 @@
 
 #include "staticscan.h"
 
-class XMIME : public QObject
-{
+class XMIME : public QObject {
     Q_OBJECT
 
 public:
-    explicit XMIME(QObject *pParent=nullptr);
-    static QList<QString> getTypes(QIODevice *pDevice,bool bIsAll=false);
-    static QList<QString> getTypes(QString sFileName,bool bIsAll=false);
+    explicit XMIME(QObject *pParent = nullptr);
+    static QList<QString> getTypes(QIODevice *pDevice, bool bIsAll = false);
+    static QList<QString> getTypes(QString sFileName, bool bIsAll = false);
 };
 
-#endif // XMIME_H
+#endif  // XMIME_H

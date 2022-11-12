@@ -20,121 +20,95 @@
  */
 #include "xmime.h"
 
-XMIME::XMIME(QObject *pParent) : QObject(pParent)
-{
-
+XMIME::XMIME(QObject *pParent) : QObject(pParent) {
 }
 
-QList<QString> XMIME::getTypes(QIODevice *pDevice,bool bIsAll)
-{
+QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll) {
     QList<QString> listResult;
 
-    SpecAbstract::SCAN_OPTIONS options={};
-    SpecAbstract::SCAN_RESULT scanResult=StaticScan::processDevice(pDevice,&options);
+    SpecAbstract::SCAN_OPTIONS options = {};
+    SpecAbstract::SCAN_RESULT scanResult = StaticScan::processDevice(pDevice, &options);
 
-    if( SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_PE32)||
-        SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_PE64))
-    {
+    if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_PE32) ||
+        SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_PE64)) {
         listResult.append("application/vnd.microsoft.portable-executable");
-    }
-    else if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_ELF32)||
-            SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_ELF64))
-    {
+    } else if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_ELF32) ||
+               SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_ELF64)) {
         listResult.append("application/x-executable");
         // TODO
-    }
-    else if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_MACHO32)||
-            SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_MACHO64))
-    {
+    } else if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_MACHO32) ||
+               SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_MACHO64)) {
         listResult.append("application/x-mach-binary");
         // TODO
     }
 
-    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_MSDOS))
-    {
+    if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_MSDOS)) {
         listResult.append("application/x-dosexec");
     }
 
-    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_PYTHON))
-    {
+    if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_PYTHON)) {
         listResult.append("text/x-python");
     }
 
-    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_PERL))
-    {
+    if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_PERL)) {
         listResult.append("text/x-perl");
     }
 
-    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_RUBY))
-    {
+    if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_RUBY)) {
         listResult.append("text/x-ruby");
     }
 
-    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_HTML))
-    {
+    if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_HTML)) {
         listResult.append("text/html");
     }
 
-    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_XML))
-    {
+    if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_XML)) {
         listResult.append("text/xml");
     }
 
-    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_PDF))
-    {
+    if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_PDF)) {
         listResult.append("application/pdf");
     }
 
-    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_MP3))
-    {
+    if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_MP3)) {
         listResult.append("audio/mpeg");
     }
 
-    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_PNG))
-    {
+    if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_PNG)) {
         listResult.append("image/png");
     }
 
-    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_JPEG))
-    {
+    if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_JPEG)) {
         listResult.append("image/jpg");
         listResult.append("image/jpeg");
     }
 
-    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_GIF))
-    {
+    if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_GIF)) {
         listResult.append("image/gif");
     }
 
-    if(SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_SHELL))
-    {
+    if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_SHELL)) {
         listResult.append("text/x-shellscript");
     }
 
-    if( SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_C)||
-        SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNKNOWN,SpecAbstract::RECORD_TYPE_UNKNOWN,SpecAbstract::RECORD_NAME_CCPP))
-    {
+    if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_C) ||
+        SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_CCPP)) {
         listResult.append("text/x-c");
     }
 
-    if( SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_TEXT)||
-        SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_PLAINTEXT)||
-        SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UTF8) ||
-        SpecAbstract::isScanStructPresent(&scanResult.listRecords,XBinary::FT_UNICODE))
-    {
-        if((listResult.count()==0)||(bIsAll))
-        {
+    if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_TEXT) ||
+        SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_PLAINTEXT) ||
+        SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UTF8) ||
+        SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNICODE)) {
+        if ((listResult.count() == 0) || (bIsAll)) {
             listResult.append("text/plain");
         }
-    }
-    else
-    {
-        if((listResult.count()==0)||(bIsAll))
-        {
+    } else {
+        if ((listResult.count() == 0) || (bIsAll)) {
             listResult.append("application/octet-stream");
         }
     }
-    
+
     // TODO
     // application/vnd.android.package-archive
     // application/x-gzip
@@ -155,21 +129,18 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice,bool bIsAll)
     return listResult;
 }
 
-QList<QString> XMIME::getTypes(QString sFileName,bool bIsAll)
-{
+QList<QString> XMIME::getTypes(QString sFileName, bool bIsAll) {
     QList<QString> listResult;
 
     QFile file;
 
     file.setFileName(sFileName);
 
-    if(file.open(QIODevice::ReadOnly))
-    {
-        listResult=getTypes(&file,bIsAll);
+    if (file.open(QIODevice::ReadOnly)) {
+        listResult = getTypes(&file, bIsAll);
 
         file.close();
     }
 
     return listResult;
 }
-
