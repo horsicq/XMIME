@@ -29,15 +29,12 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll) {
     SpecAbstract::SCAN_OPTIONS options = {};
     SpecAbstract::SCAN_RESULT scanResult = StaticScan::processDevice(pDevice, &options);
 
-    if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_PE32) ||
-        SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_PE64)) {
+    if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_PE32) || SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_PE64)) {
         listResult.append("application/vnd.microsoft.portable-executable");
-    } else if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_ELF32) ||
-               SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_ELF64)) {
+    } else if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_ELF32) || SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_ELF64)) {
         listResult.append("application/x-executable");
         // TODO
-    } else if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_MACHO32) ||
-               SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_MACHO64)) {
+    } else if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_MACHO32) || SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_MACHO64)) {
         listResult.append("application/x-mach-binary");
         // TODO
     }
@@ -96,10 +93,8 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll) {
         listResult.append("text/x-c");
     }
 
-    if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_TEXT) ||
-        SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_PLAINTEXT) ||
-        SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UTF8) ||
-        SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNICODE)) {
+    if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_TEXT) || SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_PLAINTEXT) ||
+        SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UTF8) || SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNICODE)) {
         if ((listResult.count() == 0) || (bIsAll)) {
             listResult.append("text/plain");
         }
