@@ -20,10 +20,12 @@
  */
 #include "xmime.h"
 
-XMIME::XMIME(QObject *pParent) : QObject(pParent) {
+XMIME::XMIME(QObject *pParent) : QObject(pParent)
+{
 }
 
-QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll) {
+QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
+{
     QList<QString> listResult;
 
     SpecAbstract::SCAN_OPTIONS options = {};
@@ -124,7 +126,8 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll) {
     return listResult;
 }
 
-QList<QString> XMIME::getTypes(QString sFileName, bool bIsAll) {
+QList<QString> XMIME::getTypes(QString sFileName, bool bIsAll)
+{
     QList<QString> listResult;
 
     QFile file;
