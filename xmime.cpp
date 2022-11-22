@@ -20,8 +20,7 @@
  */
 #include "xmime.h"
 
-XMIME::XMIME(QObject *pParent)
-    : QObject(pParent)
+XMIME::XMIME(QObject *pParent) : QObject(pParent)
 {
 }
 
