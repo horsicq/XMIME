@@ -33,10 +33,12 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
 
     if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_PE32) || SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_PE64)) {
         listResult.append("application/vnd.microsoft.portable-executable");
-    } else if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_ELF32) || SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_ELF64)) {
+    } else if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_ELF32) ||
+               SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_ELF64)) {
         listResult.append("application/x-executable");
         // TODO
-    } else if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_MACHO32) || SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_MACHO64)) {
+    } else if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_MACHO32) ||
+               SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_MACHO64)) {
         listResult.append("application/x-mach-binary");
         // TODO
     }
