@@ -97,7 +97,8 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
         listResult.append("text/x-c");
     }
 
-    if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_TEXT) || SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_PLAINTEXT) ||
+    if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_TEXT) ||
+        SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_PLAINTEXT) ||
         SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UTF8) || SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNICODE)) {
         if ((listResult.count() == 0) || (bIsAll)) {
             listResult.append("text/plain");
