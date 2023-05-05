@@ -29,7 +29,7 @@ class XMIME : public QObject {
 public:
     explicit XMIME(QObject *pParent = nullptr);
     static QList<QString> getTypes(QIODevice *pDevice, bool bIsAll = false);
-    static QList<QString> getTypes(QString sFileName, bool bIsAll = false);
+    static QList<QString> getTypes(const QString &sFileName, bool bIsAll = false);
 };
 
 #endif  // XMIME_H

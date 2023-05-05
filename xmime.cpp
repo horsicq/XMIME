@@ -133,7 +133,7 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
     return listResult;
 }
 
-QList<QString> XMIME::getTypes(QString sFileName, bool bIsAll)
+QList<QString> XMIME::getTypes(const QString &sFileName, bool bIsAll)
 {
     QList<QString> listResult;
 
