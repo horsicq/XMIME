@@ -33,7 +33,8 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
 
     // Executables
     {
-        if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_PE32) || SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_PE64)) {
+        if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_PE32) ||
+            SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_PE64)) {
             listResult.append("application/vnd.microsoft.portable-executable");
         } else if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_ELF32) ||
                    SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_ELF64)) {
@@ -109,7 +110,6 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
             listResult.append("image/gif");
         }
     }
-
 
     if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_TEXT) ||
         SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_PLAINTEXT) ||
