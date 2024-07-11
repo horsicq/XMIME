@@ -21,7 +21,7 @@
 #ifndef XMIME_H
 #define XMIME_H
 
-#include "staticscan.h"
+#include "specabstract.h"
 
 class XMIME : public QObject {
     Q_OBJECT

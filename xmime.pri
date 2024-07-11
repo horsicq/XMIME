@@ -7,9 +7,9 @@ HEADERS += \
 SOURCES += \
     $$PWD/xmime.cpp
 
-!contains(XCONFIG, staticscan) {
-    XCONFIG += staticscan
-    include($$PWD/../SpecAbstract/staticscan.pri)
+!contains(XCONFIG, specabstract) {
+    XCONFIG += specabstract
+    include($$PWD/../SpecAbstract/specabstract.pri)
 }
 
 DISTFILES += \

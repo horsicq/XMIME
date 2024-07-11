@@ -29,30 +29,35 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
     QList<QString> listResult;
 
     XScanEngine::SCAN_OPTIONS options = {};
-    XScanEngine::SCAN_RESULT scanResult = StaticScan::processDevice(pDevice, &options);
+    XScanEngine::SCAN_RESULT scanResult = SpecAbstract().scanDevice(pDevice, &options);
 
+    bool bBinary = false;
     // Executables
     {
         if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_PE32) ||
             SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_PE64)) {
             listResult.append("application/vnd.microsoft.portable-executable");
+            bBinary = true;
         } else if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_ELF32) ||
                    SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_ELF64)) {
             listResult.append("application/x-executable");
+            bBinary = true;
             // TODO
         } else if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_MACHO32) ||
                    SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_MACHO64)) {
             listResult.append("application/x-mach-binary");
+            bBinary = true;
             // TODO
         }
 
         if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_MSDOS)) {
             listResult.append("application/x-dosexec");
+            bBinary = true;
         }
     }
 
     // Documents
-    {
+    if (!bBinary) {
         if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_PYTHON)) {
             listResult.append("text/x-python");
         }
