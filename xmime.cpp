@@ -28,8 +28,12 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
 {
     QList<QString> listResult;
 
-    XScanEngine::SCAN_OPTIONS options = {};
-    XScanEngine::SCAN_RESULT scanResult = SpecAbstract().scanDevice(pDevice, &options);
+    XScanEngine::SCAN_OPTIONS scanOptions = {};
+    scanOptions.bShowType = true;
+    scanOptions.bShowVersion = true;
+    scanOptions.bShowInfo = true;
+
+    XScanEngine::SCAN_RESULT scanResult = SpecAbstract().scanDevice(pDevice, &scanOptions);
 
     bool bBinary = false;
     // Executables
