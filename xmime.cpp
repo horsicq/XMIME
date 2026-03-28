@@ -131,12 +131,21 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
             listResult.append("application/octet-stream");
         }
     }
+    {
+        if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_GZIP)) {
+            listResult.append("application/x-gzip");
+        }
+    
+    }
+    {
+        if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_BZIP2)) {
+            listResult.append("application/x-bzip2");
+        }
+    
+    }
 
     // TODO
     // application/vnd.android.package-archive
-    // application/x-gzip
-    // application/x-bzip2
-    // application/x-bzip
     // application/x-lzip
     // application/x-7z-compressed
     // application/x-lzma
