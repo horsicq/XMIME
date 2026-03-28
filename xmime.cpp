@@ -143,7 +143,12 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
         }
     
     }
-
+    {
+        if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_BZIP)) {
+            listResult.append("application/x-bzip");
+        }
+    
+    }
     // TODO
     // application/vnd.android.package-archive
     // application/x-lzip
