@@ -135,97 +135,82 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
         if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_GZIP)) {
             listResult.append("application/x-gzip");
         }
-    
     }
     {
         if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_BZIP2)) {
             listResult.append("application/x-bzip2");
         }
-    
     }
     {
         if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_BZIP)) {
             listResult.append("application/x-bzip");
         }
-    
     }
     {
         if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_LZIP)) {
             listResult.append("application/x-lzip");
         }
-    
     }
     {
         if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_7ZCOMPRESSED)) {
             listResult.append("application/x-7z-compressed");
         }
-    
     }
     {
         if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_LZMA)) {
             listResult.append("application/x-lzma");
         }
-    
     }
     {
         if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_XZ)) {
             listResult.append("application/x-xz");
         }
-    
     }
     {
         if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_LRZIP)) {
             listResult.append("application/x-lrzip");
         }
-    
     }
     {
         if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_LZ4)) {
             listResult.append("application/x-lz4");
         }
-    
     }
     {
         if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_ZSTD)) {
             listResult.append("application/x-zstd");
         }
-    
     }
     {
         if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_ZLIB)) {
             listResult.append("application/x-zlib");
         }
-    
     }
     {
         if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_JAVASCRIPT)) {
             listResult.append("application/x-javascript");
         }
-    
     }
     {
         if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_ARCHIVE)) {
             listResult.append("application/x-archive");
         }
-    
     }
     {
         if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_WMV)) {
             listResult.append("video/x-ms-wmv");
         }
-    
     }
     {
         if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_WMA)) {
             listResult.append("audio/x-ms-wma");
         }
-    
     }
     {
-        if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_ANDROIDPACKAGE)) {
+        if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN,
+                                              SpecAbstract::RECORD_NAME_ANDROIDPACKAGE)) {
             listResult.append("application/vnd.android.package-archive");
         }
-    
     }
 
     return listResult;
