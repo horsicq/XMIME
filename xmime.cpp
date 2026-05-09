@@ -36,7 +36,6 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
     XScanEngine::SCAN_RESULT scanResult = SpecAbstract().scanDevice(pDevice, &scanOptions);
 
     bool bBinary = false;
-    // Executables
     {
         if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_PE32) ||
             SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_PE64)) {
@@ -60,7 +59,6 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
         }
     }
 
-    // Documents
     if (!bBinary) {
         if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_PYTHON)) {
             listResult.append("text/x-python");
@@ -96,7 +94,6 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
         }
     }
 
-    // Media
     {
         if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNKNOWN, SpecAbstract::RECORD_TYPE_UNKNOWN, SpecAbstract::RECORD_NAME_MP3)) {
             listResult.append("audio/mpeg");
@@ -123,11 +120,11 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
     if (SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_TEXT) ||
         SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_PLAINTEXT) ||
         SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UTF8) || SpecAbstract::isScanStructPresent(&scanResult.listRecords, XBinary::FT_UNICODE)) {
-        if ((listResult.count() == 0) || (bIsAll)) {
+        if ((listResult.isEmpty()) || (bIsAll)) {
             listResult.append("text/plain");
         }
     } else {
-        if ((listResult.count() == 0) || (bIsAll)) {
+        if ((listResult.isEmpty()) || (bIsAll)) {
             listResult.append("application/octet-stream");
         }
     }
