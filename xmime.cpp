@@ -20,6 +20,8 @@
  */
 #include "xmime.h"
 
+#include <QPointer>
+
 #include "xformats.h"
 #include "xelf.h"
 
@@ -356,14 +358,17 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
 {
     QList<QString> listResult;
 
-    if (!pDevice) {
+    if (!pDevice || !pDevice->isOpen() || !pDevice->isReadable() || pDevice->isSequential()) {
         return listResult;
     }
 
-    // Defensive: a byte-level sniffer must look from the start of the stream.
-    if (pDevice->isOpen() && !pDevice->isSequential()) {
-        pDevice->seek(0);
+    const qint64 nOriginalPosition = pDevice->pos();
+
+    if ((nOriginalPosition < 0) || !pDevice->seek(0)) {
+        return listResult;
     }
+
+    QPointer<QIODevice> pDeviceGuard = pDevice;
 
     // Concrete file-type set (the tested detector the scan engine itself uses).
     QSet<XBinary::FT> stFT = XFormats::getFileTypes(pDevice, true);
@@ -401,6 +406,10 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
         } else {
             _appendUnique(&listResult, "application/octet-stream");
         }
+    }
+
+    if (!pDeviceGuard || !pDeviceGuard->seek(nOriginalPosition)) {
+        listResult.clear();
     }
 
     return listResult;
