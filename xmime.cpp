@@ -371,7 +371,7 @@ QList<QString> XMIME::getTypes(QIODevice *pDevice, bool bIsAll)
     QPointer<QIODevice> pDeviceGuard = pDevice;
 
     // Concrete file-type set (the tested detector the scan engine itself uses).
-    QSet<XBinary::FT> stFT = XFormats::getFileTypes(pDevice, true);
+    QSet<XBinary::FT> stFT = XFormats::getFileTypes(pDevice, XBinary::FT_FLAG_FORMATS);
 
     // Deep scan for the RECORD_NAME markers no file type captures (source languages, office
     // sub-types, FT-less media/compressors, .deb).
